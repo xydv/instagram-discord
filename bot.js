@@ -7,6 +7,7 @@ const client = new Client({
         Intents.FLAGS.GUILD_MESSAGES
     ]
 });
+let IEMBED;
 // If Client Gets Ready
 client.once('ready', () => {
     console.log('Ready!');
@@ -25,7 +26,7 @@ client.on('messageCreate', async (message) => {
             let status = fetching.status;
             if (!(status >= 400)) {
                 let response = await fetching.json()
-                let IEMBED = new MessageEmbed()
+                IEMBED = new MessageEmbed()
                     .setColor("#e95950")
                     .setTitle(response.name)
                     .setURL(`https://instagram.com/${username}`)
@@ -39,13 +40,12 @@ client.on('messageCreate', async (message) => {
                     .setTimestamp(Number(response.timestamp));
                 message.channel.send({ embeds: [IEMBED] });
             } else {
-                message.channel.send(
-                    new MessageEmbed()
-                        .setColor("#e95950")
-                        .setTitle(`Error`)
-                        .setDescription("Profile is private or doesn't exist!.")
-                        .setTimestamp()
-                );
+                IEMBED = new MessageEmbed()
+                    .setColor("#e95950")
+                    .setTitle(`Error`)
+                    .setDescription("Profile is private or doesn't exist!.")
+                    .setTimestamp()
+                message.channel.send({ embeds: [IEMBED] });
             }
         }
     }
