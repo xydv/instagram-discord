@@ -1,4 +1,4 @@
-# Instgram Discord Bot
+# Instagram Discord Bot
 ## ⏮ Prefix
 ```
 !ig <username>
